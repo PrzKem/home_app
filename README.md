@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://github.com/PrzKem/home_app)
 
 ## About project
-This project is created to help house maintanence. As final product it will be able to help at 5 fields.
+This project is created to help house maintanence. As final product it will be able to help at 4 fields.
 
 ### Food
 >This app will help you managing food. You can create basic food plan based on your meals. You can add various meals with their ingredients - limitations are only in your DB! Moreover, you can create shopping list based on your food plan.
