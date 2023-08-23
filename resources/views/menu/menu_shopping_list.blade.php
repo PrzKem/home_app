@@ -2,6 +2,7 @@
 <html>
 <head>
  @include('head')
+ <script type="text/javascript" src="{{asset('js/getShoppingList.js')}}"></script>
 
 </head>
 <body>
@@ -43,7 +44,5 @@
       </div>
     </div>
   </div>
-
-<script type="text/javascript" src="/getShoppingList.js"></script>
 </body>
 </html>

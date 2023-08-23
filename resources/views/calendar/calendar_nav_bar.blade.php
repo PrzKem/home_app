@@ -8,7 +8,7 @@
           <a class="nav-link" href="{{url('calendar/tripPlannerMainPage')}}">Events planner</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Household checklist editor</a>
+          <a class="nav-link" style="color:grey">Household checklist editor</a>
         </li>
       </ul>
       <h3 class="mt-5">Navigation</h3>

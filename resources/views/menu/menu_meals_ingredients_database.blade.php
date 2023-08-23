@@ -2,6 +2,7 @@
 <html>
 <head>
  @include('head')
+ <script type="text/javascript" src="{{asset('js/list_adder_meals.js')}}"></script>
 </head>
 <body>
 <div class="container mt-3">
@@ -149,6 +150,6 @@
 
   </div>
 </div>
-<script type="text/javascript" src="/list_adder.js"></script>
+
 </body>
 </html>
