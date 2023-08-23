@@ -30,4 +30,47 @@ class TagsController extends Controller
       ];
     }
   }
+
+  public function edit(IoTTags $tag)
+  {
+    $request->validate([
+      'value' => 'required',
+      'id' => 'required'
+    ]);
+
+    $tag->update($request->query('id',$request['id']), ['timestamps' => false]);
+
+    return [
+        "status" => 1,
+        "data" => $tag,
+        "msg" => "Data updated successfully"
+    ];
+  }
+
+  public function update(Request $request, IoTTags $tag)
+  {
+    $request->validate([
+      'value' => 'required',
+      'id' => 'required'
+    ]);
+    $input = $request->all();
+    //$tag->where('id',$input['id'])->update(['value' => $input['value'], 'timestamps' => false]);
+    $tag = IoTTags::find($input['id']);
+    $tag->value = $input['value'];
+    $tag->timestamps=false;
+    $tag->save();
+
+    $updated_tag = $tag->where('id',$request['id'])->get();
+    return response()->json([
+        "status" => 1,
+        "data" => $updated_tag,
+        "msg" => "Data updated successfully"
+    ], 200);
+  }
+
+  public function store(Request $request, IoTTags $tag)
+  {
+    return $this->update($request, $tag);
+  }
+
 }

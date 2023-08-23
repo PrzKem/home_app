@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Readings;
+use App\Models\Sensors;
+use App\Models\Controllers;
 use Illuminate\Http\Request;
 
 class ReadingsController extends Controller
@@ -33,7 +35,12 @@ class ReadingsController extends Controller
           'reading_value' => 'required'
       ]);
 
-      $readings= Readings::create($request->all());
+      //Sensors::where('id',$request->query('sensor_id'))->update(['last_read_value' => $request->query('reading_value')]);
+      $toUpdate = ['last_read_value' => $request->reading_value];
+      Sensors::where('id', $request->sensor_id)->update($toUpdate);
+      $toUpdate = ['location' => 'sypialnia'];
+      $readings = Readings::create($request->all());
+
       return response()->json([
           "status" => 1,
           "data" => $readings
@@ -48,16 +55,8 @@ class ReadingsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'sensor_id' => 'required',
-            'reading_value' => 'required'
-        ]);
 
-        $readings= Readings::create($request->all());
-        return response()->json([
-            "status" => 1,
-            "data" => $readings
-        ],201);
+        return $this->create($request);
     }
 
     /**
@@ -140,5 +139,22 @@ class ReadingsController extends Controller
     {
         $readings->where('id',$id)->delete();
         return response()->json(null,204);
+    }
+
+    public function showReadingsFromSensor(Readings $readings, string $limit, string $id)
+    {
+      if ($id!="")
+      {
+        return response()->json([
+            "status" => 1,
+            "data"=>$readings->where('sensor_id',$id)->orderBy('updated_at','desc')->limit($limit)->get(['reading_value','created_at'])
+          ],200);
+      }
+      else{
+        return response()->json([
+            "status" => 1,
+            "data" =>$readings
+        ],200);
+      }
     }
 }

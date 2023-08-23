@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Controllers;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ControllersController extends Controller
 {
@@ -16,24 +17,7 @@ class ControllersController extends Controller
       ];
   }
 
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function create(Request $request)
-  {
-    $request->validate([
-        'name' => 'required',
-        'location' => 'required'
-    ]);
 
-    $controllers= Controllers::create($request->all());
-    return response()->json([
-        "status" => 1,
-        "data" => $controllers
-    ], 201);
-  }
 
   /**
    * Store a newly created resource in storage.
@@ -117,13 +101,33 @@ class ControllersController extends Controller
       'location' => 'required'
     ]);
     $input = $request->all();
+    $input['updated_at'] = Carbon::now()->add(2, 'hours');
     $controllers->where('id',$id)->update($input);
     $updated_reading = $controllers->where('id',$id)->get();
     return response()->json([
         "status" => 1,
-        "data" => $updated_reading,
+        "data" => $input,
         "msg" => "Data updated successfully"
     ], 200);
+  }
+
+  /**
+   * Show the form for creating a new resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function create(Request $request, Controllers $controllers)
+  {
+    $request->validate([
+        'name' => 'required',
+        'location' => 'required'
+    ]);
+    $controllers= Controllers::create($request->all());
+      return response()->json([
+          "status" => 1,
+          "data" => $controllers
+      ], 201);
+
   }
 
   /**

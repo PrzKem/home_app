@@ -75,7 +75,7 @@ class SensorsController extends Controller
     else{
       return [
           "status" => Arr::exists($sensors,'id')?1:0,
-          "data" =>$sensors
+          "data" =>$sensors->get()
       ];
     }
   }

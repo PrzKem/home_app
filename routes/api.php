@@ -35,6 +35,7 @@ Controllers API for IoT
 Route::get('/controllers', [ControllersController::class, 'index']);
 Route::get('/controllers/{id}', [ControllersController::class, 'show']);
 Route::put('/controllers/{id}', [ControllersController::class, 'update']);
+Route::post('/controllers/{id}', [ControllersController::class, 'update']);
 Route::delete('/controllers/{id}', [ControllersController::class, 'destroy']);
 Route::post('/controllers', [ControllersController::class, 'create']);
 
@@ -49,7 +50,9 @@ Route::post('/sensors', [SensorsController::class, 'create']);
 Route::get('/sensors/controllers/{id}', [SensorsController::class, 'showConnectedToController']);
 
 //readings of sensors
+Route::get('/readings/{limit}/sensor/{id}', [ReadingsController::class, 'showReadingsFromSensor']);
 Route::resource('readings', ReadingsController::class);
 
 Route::get('/iot/token/{id}', [TagsController::class, 'show']);
+Route::put('/iot/token', [TagsController::class, 'update']);
 Route::resource('iot/token', TagsController::class);
