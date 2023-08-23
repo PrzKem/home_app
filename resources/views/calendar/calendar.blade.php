@@ -24,7 +24,7 @@
     </div>
   </div>
 
-<script type="text/javascript" src="/calendar_script.js"></script>
+<script type="text/javascript" src="js/calendar_script.js"></script>
 
 </body>
 </html>
