@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('controller_id');
             $table->string('measurement_unit');
+            $table->float('last_read_value')->default(0.0);
             $table->timestamps();
 
             $table->foreign('controller_id')->references('id')->on('controllers')

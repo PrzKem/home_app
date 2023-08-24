@@ -91,6 +91,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('hd/tags', [HomeDevicesController::class, 'getTags']);
         Route::get('hd/sensors', [HomeDevicesController::class, 'getSensors']);
         Route::get('hd/controllers', [HomeDevicesController::class, 'getControllers']);
+        Route::post('hd/addController', [HomeDevicesController::class, 'addController']);
+        Route::get('hd/addController', [HomeDevicesController::class, 'addControllerForm']);    
+        Route::post('hd/addSensor', [HomeDevicesController::class, 'addSensor']);
+        Route::get('hd/addSensor', [HomeDevicesController::class, 'addSensorForm']);
         Route::post('hd/addTag', [HomeDevicesController::class, 'addTag']);
         Route::get('hd/charts', [HomeDevicesController::class, 'getCharts']);
         Route::resource('hd', HomeDevicesController::class);
