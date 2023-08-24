@@ -9,5 +9,5 @@ class Sensors extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
-    protected $fillable = ['controller_id','measurement_unit', 'last_read_value'];
+    protected $fillable = ['controller_id','measurement_unit', 'last_read_value', 'description'];
 }
