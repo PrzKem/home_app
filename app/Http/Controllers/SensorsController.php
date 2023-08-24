@@ -10,7 +10,7 @@ class SensorsController extends Controller
 {
   public function index()
   {
-      $sensors = Sensors::latest()->paginate(10);
+      $sensors = Sensors::orderBy('id','asc')->latest()->paginate(10);
       return [
           "status" => 1,
           "data" => $sensors
@@ -112,10 +112,10 @@ class SensorsController extends Controller
    */
   public function edit(Sensors $sensors,string $id)
   {
-    $request->validate([
+    /*$request->validate([
       'controller_id' => 'required',
       'measurement_unit' => 'required'
-    ]);
+    ]);*/
 
     $sensors->update($request->query('id',$id));
 
@@ -136,10 +136,11 @@ class SensorsController extends Controller
    */
   public function update(Request $request, Sensors $sensors,string $id)
   {
+    /*
     $request->validate([
       'controller_id' => 'required',
       'measurement_unit' => 'required'
-    ]);
+    ]);*/
     $input = $request->all();
     $sensors->where('id',$id)->update($input);
     $updated_reading = $sensors->where('id',$id)->get();
